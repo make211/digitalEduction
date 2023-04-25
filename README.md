@@ -1,6 +1,6 @@
 # digital_education
 
-Graduation project created by the make team
+Graduation project created by the MAKE team
 
 ## Getting Started
 
