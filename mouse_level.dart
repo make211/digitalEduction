@@ -7,6 +7,7 @@ import 'package:digital_education/widgets/routs.dart';
 import 'package:digital_education/widgets/text.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class MouseScreen extends StatefulWidget {
   const MouseScreen({super.key});
@@ -19,6 +20,21 @@ class _MouseScreenState extends State<MouseScreen> {
   TextEditingController anserController = TextEditingController();
   var formKey = GlobalKey<FormState>();
   bool showContainer = false;
+  final videoURL = "https://youtu.be/xKEOwnc8AEk?list=PLuLbIQFOxjf7ejPyXOMqEREf3f2QxOPRb";
+  
+  late YoutubePlayerController _controller;
+
+  @override
+  void initState() {
+     final videoID = YoutubePlayer.convertUrlToId(videoURL);
+     _controller = YoutubePlayerController(initialVideoId: videoID!,
+     flags: const YoutubePlayerFlags(
+      autoPlay: false,
+     )
+     );
+     
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,6 +85,33 @@ class _MouseScreenState extends State<MouseScreen> {
                           "assets/images/mouse.jpg",
                         )),
                   ),
+                  SizedBox(
+                    height: context.height * 0.03,
+                  ),
+                  
+                         YoutubePlayer( 
+                          progressColors: const ProgressBarColors(playedColor: Colors.red),
+                          controller: _controller,
+                         showVideoProgressIndicator: true,
+                        
+                          bottomActions: [
+                            
+                            CurrentPosition(),
+                            ProgressBar(
+                              isExpanded: true,
+                              colors: const ProgressBarColors(
+                                handleColor: Colors.red,
+                                playedColor: Colors.red,
+                                
+
+                              ),
+                            )
+
+                          ],
+                          
+                         
+                         ),
+
                   SizedBox(
                     height: context.height * 0.03,
                   ),
@@ -139,7 +182,7 @@ class _MouseScreenState extends State<MouseScreen> {
                         }
                        
                       },
-                      hint: "أدخل الأجابة"),
+                      hint: " الأجابة"),
                   SizedBox(
                     height: context.height * 0.02,
                   ),
@@ -152,8 +195,8 @@ class _MouseScreenState extends State<MouseScreen> {
                           if (formKey.currentState!.validate()) {
                             setState(() {
                               showContainer = true;
-                              navigateAndFinish(
-                                  context, const KeyboardScreen());
+                              navigateTo(
+                                  context,  const KeyboardScreen());
                             });
                           }
                         },

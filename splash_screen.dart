@@ -1,13 +1,17 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:animations/animations.dart';
 import 'package:digital_education/screens/mouse_level.dart';
 import 'package:digital_education/utils/app_colors.dart';
 import 'package:digital_education/utils/media_query_values.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'dart:ui';
 
 class MyWidget extends StatefulWidget {
+  const MyWidget({super.key});
+
   @override
+
   _MyWidgetState createState() => _MyWidgetState();
 }
 
@@ -57,7 +61,7 @@ class _MyWidgetState extends State<MyWidget> {
                   borderRadius: BorderRadius.circular(20)),
               transitionDuration: const Duration(milliseconds: 700),
               openBuilder: (_, closeContainer) {
-                return SecondPage();
+                return const SecondPage();
               },
             ),
           ],
@@ -68,6 +72,8 @@ class _MyWidgetState extends State<MyWidget> {
 }
 
 class SecondPage extends StatefulWidget {
+  const SecondPage({super.key});
+
   @override
   _SecondPageState createState() => _SecondPageState();
 }
@@ -99,7 +105,7 @@ class _SecondPageState extends State<SecondPage> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(milliseconds: 500), () {
+    Timer( const Duration(milliseconds: 500), () {
       setState(() {
         _g = true;
         _a = true;
@@ -141,7 +147,7 @@ class _SecondPageState extends State<SecondPage> {
       Navigator.of(context).pushReplacement(
         ThisIsFadeRoute(
           route: const MouseScreen(),
-          page: SecondPage(),
+          page: const SecondPage(),
         ),
       );
     });

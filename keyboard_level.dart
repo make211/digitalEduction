@@ -7,6 +7,7 @@ import 'package:digital_education/widgets/routs.dart';
 import 'package:digital_education/widgets/text.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class KeyboardScreen extends StatefulWidget {
   const KeyboardScreen({super.key});
@@ -19,6 +20,20 @@ class _KeyboardScreenState extends State<KeyboardScreen> {
   TextEditingController anserController = TextEditingController();
   var formKey = GlobalKey<FormState>();
   bool showContainer = false;
+  final videoURL = "https://youtu.be/y2nihV50cGc?list=PLuLbIQFOxjf7ejPyXOMqEREf3f2QxOPRb";
+  
+  late YoutubePlayerController _controller;
+   @override
+  void initState() {
+     final videoID = YoutubePlayer.convertUrlToId(videoURL);
+     _controller = YoutubePlayerController(initialVideoId: videoID!,
+     flags: const YoutubePlayerFlags(
+      autoPlay: false,
+     )
+     );
+     
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +43,7 @@ class _KeyboardScreenState extends State<KeyboardScreen> {
         elevation: 0.0,
         backgroundColor: AppColors.backGround,
         title: Text(
-          "Keyboard",
+          "لوحة المفاتيح",
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               fontSize: 25,
               fontWeight: FontWeight.w600,
@@ -64,6 +79,32 @@ class _KeyboardScreenState extends State<KeyboardScreen> {
                             borderRadius: BorderRadius.circular(20)),
                         child: Image.asset("assets/images/key.jpg")),
                   ),
+                  SizedBox(
+                    height: context.height * 0.03,
+                  ),
+                   YoutubePlayer( 
+                          progressColors: const ProgressBarColors(playedColor: Colors.red),
+                          controller: _controller,
+                         showVideoProgressIndicator: true,
+                        
+                          bottomActions: [
+                            
+                            CurrentPosition(),
+                            ProgressBar(
+                              isExpanded: true,
+                              colors: const ProgressBarColors(
+                                handleColor: Colors.red,
+                                playedColor: Colors.red,
+                                
+
+                              ),
+                            )
+
+                          ],
+                          
+                         
+                         ),
+
                   SizedBox(
                     height: context.height * 0.03,
                   ),
@@ -141,7 +182,7 @@ class _KeyboardScreenState extends State<KeyboardScreen> {
                           return "الأجابة خاطئة";
                         }
                       },
-                      hint: "أدخل الأجابة"),
+                      hint: " الأجابة"),
                   SizedBox(
                     height: context.height * 0.02,
                   ),
@@ -154,7 +195,7 @@ class _KeyboardScreenState extends State<KeyboardScreen> {
                           if (formKey.currentState!.validate()) {
                             setState(() {
                               showContainer = true;
-                              navigateAndFinish(
+                              navigateTo(
                                   context, const DesktopEnterFace());
                             });
                           }

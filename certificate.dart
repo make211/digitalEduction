@@ -20,7 +20,8 @@ class _CertificateScreenState extends State<CertificateScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backGround,
-      appBar: AppBar(
+      appBar: AppBar( 
+        
         centerTitle: true,
         title: Text(
           "Certificate",
@@ -48,18 +49,18 @@ class _CertificateScreenState extends State<CertificateScreen> {
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           TextArt(
                               text:
-                                  "Congratulations on completing all levels and answering all questions. You are now fully prepared to deal with computers. We wish you success and progress always.",
+                                  "مبروك على إكمال جميع المستويات والإجابة على جميع الأسئلة. أنت الآن على استعداد تام للتعامل مع أجهزة الكمبيوتر. نتمنى لكم التوفيق والنجاح دائما",
                               textColor: AppColors.backGround),
                           SizedBox(
                             height: context.height * 0.03,
                           ),
                           Center(
                             child: Text(
-                              "Dear: ${nameController.text}",
+                              " عزيزي: ${nameController.text}",
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyMedium!
@@ -70,15 +71,15 @@ class _CertificateScreenState extends State<CertificateScreen> {
                             ),
                           ),
                           SizedBox(
-                            height: context.height * 0.09,
+                            height: context.height * 0.05  ,
                           ),
                           TextArt(
-                              text: "  Instractours Sign:",
+                              text: ": امضاء المعلمين  ",
                               textColor: AppColors.backGround),
                           Image.asset(
                             "assets/images/signs.png",
-                            height: context.height * 0.2,
-                            width: context.width * 0.5,
+                           height: context.height * 0.2,
+                           width: context.width * 0.5,
                           ),
                           Center(
                             child: TextArt(
@@ -97,13 +98,13 @@ class _CertificateScreenState extends State<CertificateScreen> {
                     type: TextInputType.name,
                     validate: (String value) {
                       if (value.isEmpty) {
-                        return "Please enter your name";
+                        return " ادخل اسمك";
                       }
                     },
-                    hint: "Enter Name"),
+                    hint: "ادخل اسمك"),
                 Center(
                   child: Lottie.asset("assets/animation/congrts.json",
-                      height: context.height * 0.15),
+                      height: context.height * 0.2),
                 )
               ],
             ),
